@@ -1,0 +1,158 @@
+---
+const experiences = [
+  {
+    title: 'QA Manual & Automation Engineer',
+    company: 'BOZ IT Staffing',
+    client: 'Intermex Wire Transfer',
+    period: 'April 2024 – Present',
+    tag: 'Fintech · LATAM Remittances',
+    bullets: [
+      'End-to-end web automation for transfer and onboarding flows (Playwright + TypeScript)',
+      'REST API functional and regression testing (Postman)',
+      'CI/CD pipeline creation, maintenance, and review (Azure DevOps)',
+      'Performance and load testing (k6)',
+      'Database queries and validations (SQL Server / SSMS)',
+      'Test Case and Test Plan management (Azure DevOps Boards & Test Plans)',
+      'Mobile testing with Appium Inspector on native apps',
+      'Cross-browser and cross-device cloud testing (LambdaTest)',
+      'API Testing trainer and mentor for the QA team (certified — BOZ IT Staffing)',
+      'Creation of functional demo videos using AI tools for stakeholder communication',
+    ],
+  },
+  {
+    title: 'QA Automation Engineer',
+    company: 'PAGY.CO',
+    client: null,
+    period: '2022 – 2024',
+    tag: null,
+    bullets: [
+      'Web test automation using Selenium WebDriver and Java',
+      'Page Object Model (POM) design pattern implementation',
+      'Integration of automated tests into CI/CD pipelines',
+      'Agile methodology (Scrum)',
+      'Issue tracking, debugging, and task management',
+    ],
+  },
+];
+---
+
+<section id="experience" class="section">
+  <div class="container">
+    <p class="section-label">Experience</p>
+
+    <ol class="timeline">
+      {experiences.map((job) => (
+        <li class="timeline-item">
+          <div class="timeline-head">
+            <h3 class="job-title">{job.title}</h3>
+            <span class="job-period">{job.period}</span>
+          </div>
+
+          <p class="job-company">
+            <strong>{job.company}</strong>
+            {job.client && (
+              <>
+                {' '}— Client: <strong>{job.client}</strong>
+              </>
+            )}
+          </p>
+
+          {job.tag && <span class="tag job-tag">{job.tag}</span>}
+
+          <ul class="job-bullets">
+            {job.bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    border-left: 2px solid var(--color-border);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 40px 28px;
+  }
+
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Node marker on the line */
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: var(--color-bg);
+    border: 2px solid var(--color-accent);
+  }
+
+  .timeline-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+  }
+
+  .job-title {
+    font-size: 19px;
+    font-weight: 600;
+  }
+
+  .job-period {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .job-company {
+    margin-top: 4px;
+    font-size: 15px;
+    color: var(--color-text-muted);
+  }
+
+  .job-company strong {
+    color: var(--color-text);
+  }
+
+  .job-tag {
+    margin-top: 12px;
+  }
+
+  .job-bullets {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .job-bullets li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  .job-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--color-text-muted);
+  }
+</style>

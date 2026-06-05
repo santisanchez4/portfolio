@@ -1,0 +1,132 @@
+---
+// BASE_URL may or may not carry a trailing slash depending on config — normalize.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const avatar = `${base}/avatar.png`;
+
+const facts = [
+  { icon: '📍', text: 'Uruguay' },
+  { icon: '💼', text: 'BOZ IT Staffing → Intermex Wire Transfer' },
+  { icon: '⏱', text: '2+ years in current role' },
+  { icon: '🎓', text: 'Software Testing Specialist (BIOS, 2024–2026)' },
+  { icon: '🌐', text: 'GitHub: github.com/santisanchez4' },
+];
+---
+
+<section id="about" class="section">
+  <div class="container">
+    <p class="section-label">About</p>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a QA Manual &amp; Automation Engineer with 4+ years of experience, currently working
+          at BOZ IT Staffing assigned to Intermex Wire Transfer — a leading fintech for
+          international remittances.
+        </p>
+        <p>
+          I specialize in end-to-end test automation using Playwright and TypeScript, REST API
+          testing with Postman, and CI/CD pipeline management in Azure DevOps.
+        </p>
+        <p>
+          I'm passionate about building maintainable test frameworks that genuinely improve team
+          confidence in deployments.
+        </p>
+        <p>
+          Beyond the day job, I develop personal projects in web and gaming tech, including a
+          tournament platform for the LATAM Warzone community.
+        </p>
+      </div>
+
+      <div class="about-side">
+        <img
+          class="about-photo"
+          src={avatar}
+          alt="Portrait of Santiago Sanchez"
+          width="260"
+          height="260"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <aside class="about-facts card" aria-label="Key facts">
+          <ul>
+            {facts.map((fact) => (
+              <li>
+                <span class="fact-icon" aria-hidden="true">{fact.icon}</span>
+                <span class="fact-text">{fact.text}</span>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .about-text p + p {
+    margin-top: 16px;
+  }
+
+  .about-text p {
+    color: var(--color-text);
+  }
+
+  .about-side {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .about-photo {
+    width: 100%;
+    max-width: 260px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  .about-facts {
+    width: 100%;
+    background: var(--color-bg-card);
+  }
+
+  .about-facts ul {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .about-facts li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .fact-icon {
+    flex-shrink: 0;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .fact-text {
+    color: var(--color-text);
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: 60fr 40fr;
+      gap: 40px;
+      align-items: start;
+    }
+  }
+</style>

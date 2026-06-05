@@ -1,0 +1,133 @@
+---
+// BASE_URL may or may not carry a trailing slash depending on config — normalize.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const cvHref = `${base}/CV-Santiago-Sanchez-EN-2026.pdf`;
+---
+
+<section id="top" class="hero">
+  <div class="container hero-inner">
+    <h1 class="hero-title">
+      <span class="hero-name">Santiago Sanchez</span>
+      <span class="hero-role">QA Manual &amp; Automation Engineer</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Building reliable software through thoughtful testing. Based in Uruguay.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">View Experience</a>
+      <a href={cvHref} class="btn btn-secondary" download>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        Download CV
+      </a>
+    </div>
+
+    <a href="#about" class="scroll-indicator" aria-label="Scroll to content">
+      <span class="scroll-dot"></span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    /* offset for the sticky nav so content reads centered */
+    padding-top: var(--nav-height);
+  }
+
+  .hero-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 80px;
+  }
+
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero-name {
+    font-size: clamp(48px, 9vw, 72px);
+    font-weight: 700;
+    line-height: 1.02;
+  }
+
+  .hero-role {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 4vw, 30px);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    margin-top: 24px;
+    max-width: 46ch;
+    font-size: clamp(16px, 2.2vw, 18px);
+    color: var(--color-text-muted);
+  }
+
+  .hero-cta {
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 24px;
+    height: 38px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 999px;
+    padding-top: 7px;
+  }
+
+  .scroll-dot {
+    width: 4px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--color-text-muted);
+    animation: scroll-bob 1.6s ease-in-out infinite;
+  }
+
+  @keyframes scroll-bob {
+    0%   { transform: translateY(0); opacity: 0; }
+    30%  { opacity: 1; }
+    60%  { transform: translateY(10px); opacity: 0; }
+    100% { transform: translateY(10px); opacity: 0; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-cta .btn {
+      flex: 1 1 auto;
+    }
+  }
+</style>

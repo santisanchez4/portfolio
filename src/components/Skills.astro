@@ -1,0 +1,55 @@
+---
+const categories = [
+  { title: 'Languages', skills: ['TypeScript', 'Java'] },
+  { title: 'Frameworks', skills: ['Playwright', 'Selenium', 'JUnit 5', 'Maven'] },
+  { title: 'API Testing', skills: ['Postman'] },
+  { title: 'Performance', skills: ['k6'] },
+  { title: 'Databases', skills: ['SQL Server (SSMS)'] },
+  { title: 'CI/CD', skills: ['Azure DevOps Pipelines'] },
+  { title: 'QA Management', skills: ['Azure DevOps (Boards, Test Plans, Bugs)'] },
+  { title: 'Version Control', skills: ['GitHub'] },
+  { title: 'Mobile Testing', skills: ['Appium Inspector', 'LambdaTest'] },
+  { title: 'AI Tools', skills: ['Claude', 'OpenAI', 'Gemini', 'DeepSeek', 'Ollama'] },
+];
+---
+
+<section id="skills" class="section">
+  <div class="container">
+    <p class="section-label">Skills</p>
+
+    <div class="skills-grid">
+      {categories.map((category) => (
+        <div class="card skill-card">
+          <p class="skill-category">{category.title}</p>
+          <div class="tag-list">
+            {category.skills.map((skill) => (
+              <span class="tag">{skill}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .skill-category {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+</style>
