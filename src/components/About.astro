@@ -38,15 +38,17 @@ const facts = [
       </div>
 
       <div class="about-side">
-        <img
-          class="about-photo"
-          src={avatar}
-          alt="Portrait of Santiago Sanchez"
-          width="260"
-          height="260"
-          loading="lazy"
-          decoding="async"
-        />
+        <div class="photo-wrapper">
+          <img
+            class="about-photo"
+            src={avatar}
+            alt="Portrait of Santiago Sanchez"
+            width="260"
+            height="260"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
 
         <aside class="about-facts card" aria-label="Key facts">
           <ul>
@@ -85,9 +87,17 @@ const facts = [
     align-items: flex-start;
   }
 
-  .about-photo {
+  .photo-wrapper {
     width: 100%;
     max-width: 260px;
+    padding: 6px;
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+  }
+
+  .about-photo {
+    width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 50%;

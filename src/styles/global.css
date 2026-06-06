@@ -130,6 +130,11 @@ strong {
   padding-block: var(--section-gap);
 }
 
+/* Tighten the gap where the first section meets the Hero */
+.hero + .section {
+  padding-top: 32px;
+}
+
 /* Section label — uppercase document-style tag */
 .section-label {
   font-family: var(--font-sans);
