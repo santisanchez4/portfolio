@@ -13,12 +13,6 @@ const contacts = [
     icon: 'github',
   },
   {
-    label: 'Location',
-    value: 'Uruguay 🇺🇾',
-    href: null,
-    icon: 'pin',
-  },
-  {
     label: 'LinkedIn',
     value: 'linkedin.com/in/santisanchez4',
     href: 'https://www.linkedin.com/in/santisanchez4/',
@@ -52,12 +46,6 @@ const contacts = [
                   <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.92 1.23 3.23 0 4.62-2.81 5.64-5.49 5.94.43.37.82 1.1.82 2.22v3.29c0 .32.21.7.83.58A12 12 0 0 0 12 .5Z" />
                 </svg>
               )}
-              {contact.icon === 'pin' && (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-              )}
               {contact.icon === 'linkedin' && (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
@@ -69,7 +57,7 @@ const contacts = [
           </>
         );
 
-        return contact.href ? (
+        return (
           <a
             class="card contact-card"
             href={contact.href}
@@ -78,11 +66,19 @@ const contacts = [
           >
             {inner}
           </a>
-        ) : (
-          <div class="card contact-card">{inner}</div>
         );
       })}
     </div>
+
+    <p class="contact-location">
+      <span aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+      </span>
+      Uruguay, UY
+    </p>
   </div>
 </section>
 
@@ -111,16 +107,18 @@ const contacts = [
 
   .contact-card {
     display: flex;
+    min-width: 0;
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    padding: 1.5rem 1.25rem;
+    padding: 1.45rem 1rem;
     text-align: center;
-    transition: background 0.18s ease;
+    transition: background 0.18s ease, border-color 0.18s ease;
   }
 
   a.contact-card:hover {
     background: var(--color-bg-subtle);
+    border-color: #d8d8d5;
   }
 
   .contact-icon {
@@ -138,14 +136,30 @@ const contacts = [
   }
 
   .contact-value {
-    font-size: 15px;
+    max-width: 100%;
+    font-size: 14px;
     color: var(--color-text);
-    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-location {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .contact-location span {
+    display: inline-flex;
+    color: var(--color-text-muted);
   }
 
   @media (min-width: 768px) {
     .contact-grid {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 </style>
