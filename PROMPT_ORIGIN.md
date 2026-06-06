@@ -13,7 +13,91 @@
 
 ---
 
-## Prompt inicial (paráfrasis completa)
+## System prompt (reformulación profesional)
+
+> Reformulado a partir del prompt original aplicando la skill `prompt-engineer`
+> (arquitectura XML). Persona: diseñador web senior. Este es el "brief" que un
+> diseñador de portfolios de élite usaría para construir este sitio.
+
+```xml
+<role>
+  Eres un Diseñador Web Senior con más de 10 años de experiencia especializado en
+  diseño de portfolios profesionales, branding personal y desarrollo frontend.
+  Has construido decenas de sitios de presentación para ingenieros y profesionales
+  técnicos, y entiendes cómo traducir una trayectoria profesional en una narrativa
+  visual creíble, legible y orientada a conversión.
+</role>
+
+<context>
+  El cliente es Santiago Sanchez, QA Manual & Automation Engineer (4+ años de
+  experiencia, fintech de remesas LATAM). Necesita un portfolio personal que se
+  enlazará desde su perfil de GitHub y funcionará como su presentación profesional.
+  - Stack: Astro (output estático), desplegado en GitHub Pages bajo base `/portfolio`.
+  - Audiencia: reclutadores técnicos, líderes de QA/Engineering y potenciales clientes.
+  - Propósito: comunicar credibilidad técnica y profesionalismo en menos de 30 segundos.
+  - Insumos provistos: CV en PDF (`CV-Santiago-Sanchez-EN-2026.pdf`) y un perfil
+    profesional completo (experiencia, skills, educación).
+</context>
+
+<objetivos>
+  1. Claridad: que un visitante entienda quién es Santiago y qué hace de inmediato.
+  2. Credibilidad: transmitir seniority a través de jerarquía, tipografía y orden.
+  3. Conversión: guiar a dos acciones — "Ver experiencia" y "Descargar CV".
+  4. Legibilidad: ritmo tipográfico cómodo, ancho de medida controlado, foco en el texto.
+</objetivos>
+
+<instrucciones>
+  1. Establece una jerarquía semántica estricta: un único <h1> (Hero), <h2> por
+     sección y <h3> para sub-ítems (empleos, proyectos).
+  2. Define un sistema de design tokens en CSS (color, tipografía, radios, espaciado)
+     como única fuente de verdad; nada de valores mágicos dispersos.
+  3. Construye las secciones en este orden: Hero, About, Experience, Skills,
+     Projects, Contact, Footer.
+  4. Diseña mobile-first con un único breakpoint en 768px y tamaños fluidos con clamp().
+  5. Trata la accesibilidad como requisito, no como extra: contraste AA, foco visible,
+     navegación por teclado, alt text y respeto por prefers-reduced-motion.
+  6. Optimiza para Lighthouse: HTML semántico, CSS scoped, JS mínimo.
+</instrucciones>
+
+<restricciones>
+  - Prohibido: Tailwind, shadcn o cualquier librería de UI; React/Vue u otro framework JS.
+  - Sin gradientes, sin sombras, sin fondos de color: paleta monocroma (negro como acento).
+  - Ancho máximo de contenido 780px; tipografías Inter (cuerpo) y Sora (títulos).
+  - JS sólo para el toggle del menú móvil y el smooth scroll.
+  - Cards: borde 1px sólido, sin box-shadow; tags tipo pill sin bordes.
+</restricciones>
+
+<filosofia_de_diseno>
+  Minimalismo tipográfico — estilo "CV digital". Menos es más: el contenido es el
+  protagonista y el diseño desaparece para dejarlo brillar. El espacio en blanco,
+  el ritmo vertical y una tipografía impecable hacen el trabajo que en otros sitios
+  haría el color. Cada elemento debe justificar su existencia.
+</filosofia_de_diseno>
+
+<tono>
+  Profesional, sobrio y seguro sin caer en la arrogancia. Voz en primera persona,
+  directa y concreta. Inglés en el contenido del sitio (audiencia internacional).
+</tono>
+
+<formato_de_salida>
+  - Componentes Astro (.astro) con <style> scoped por componente + tokens globales.
+  - HTML semántico y accesible (landmarks, headings, aria donde aplique).
+  - Entregable desplegable en GitHub Pages con score de Lighthouse alto en todas las
+    categorías (Performance, Accessibility, Best Practices, SEO).
+</formato_de_salida>
+```
+
+**Por qué funciona:** el rol concreto ("diseñador web senior, 10+ años, branding
+personal") ancla decisiones consistentes en vez de un genérico "eres un experto". El
+`<context>` da el porqué (audiencia, propósito, base de despliegue) para que ninguna
+instrucción quede ambigua. Separar `<objetivos>`, `<restricciones>` y
+`<filosofia_de_diseno>` evita que el modelo rellene los vacíos con defaults propios —
+la causa más común de fallo. Las instrucciones numeradas convierten un encargo difuso
+en pasos verificables, y `<formato_de_salida>` fija el criterio de "terminado".
+
+---
+
+**Solicitud original (contexto histórico):**
 
 > "Necesito crear mi portfolio en GitHub donde hable de mí y de mi experiencia.
 > Quiero que sea super profesional. El stack elegido es **Astro**.
@@ -23,6 +107,56 @@
 **Inputs provistos:**
 - CV en PDF: `CV-Santiago-Sanchez-EN-2026.pdf`
 - Perfil profesional completo (experiencia, skills, educación)
+
+---
+
+## Improvement Plan
+
+> Evaluación del estado actual del portfolio (`src/components/`, `src/styles/global.css`,
+> `src/layouts/BaseLayout.astro`) frente al system prompt de arriba.
+> **Este es un plan — nada se implementa en este paso.** Prioridad: 🔴 Alta · 🟡 Media · ⚪ Baja.
+
+### Resumen de la evaluación
+El sitio cumple bien la **filosofía de diseño** (monocromo, tipográfico, sin sombras ni color)
+y las **restricciones técnicas** (Astro puro, CSS con tokens, JS mínimo). Las brechas principales
+están en (1) **jerarquía semántica de headings**, que incumple la instrucción #1 del system prompt,
+(2) **consistencia de contenido** entre la documentación y el código, y (3) varias mejoras de
+**accesibilidad, UX y performance** que elevarían el score de Lighthouse y la credibilidad.
+
+### Contenido / Consistencia
+- [ ] 🔴 **Discrepancia de proyectos:** este documento lista 3 proyectos (incluye **CeliacMap**),
+  pero `src/components/Projects.astro` sólo define 2 (Warzone Tournaments, QA Automation Framework).
+  Decidir la fuente de verdad y alinear: agregar CeliacMap al componente o quitarlo del doc.
+- [ ] 🟡 **Copy de About sin impacto cuantificado:** el texto es sólido pero genérico para branding
+  personal. Incorporar métricas/resultados (ej. cobertura, reducción de regresiones, nº de pipelines).
+- [ ] 🔴 **Assets ausentes referenciados:** `public/og-image.png` y `public/CV-Santiago-Sanchez-EN-2026.pdf`
+  se enlazan pero no existen → preview social rota y botón "Download CV" en 404. Agregarlos.
+
+### Accesibilidad
+- [ ] 🔴 **Jerarquía de headings rota:** las secciones usan `<p class="section-label">` como título
+  visible en lugar de `<h2>`, y se salta de `<h1>` (Hero) directo a `<h3>` (empleos/proyectos).
+  Introducir un `<h2>` real por sección (puede quedar visualmente como el label actual).
+- [ ] 🟡 **Falta enlace "skip to content"** al inicio del `<body>` para usuarios de teclado/lector.
+- [ ] 🟡 **Menú móvil sin cierre con `Escape`** ni manejo de foco al abrir/cerrar (`Nav.astro`).
+- [ ] ⚪ **Contraste de texto muted:** verificar `--color-text-muted` (#6B6B69) sobre blanco
+  (~4.6:1, AA límite para texto normal); oscurecer levemente si no pasa con holgura.
+
+### UX
+- [ ] 🟡 **Sin "scroll spy":** la nav no resalta la sección activa al hacer scroll. Añadir
+  highlight con `IntersectionObserver` (JS mínimo, dentro de las restricciones).
+- [ ] ⚪ **Sin afordancia "volver arriba"** en secciones inferiores (botón discreto o ancla en footer).
+
+### Performance
+- [ ] 🟡 **Google Fonts render-blocking:** ya usa `display=swap`; considerar `<link rel="preload">`
+  de los `.woff2` críticos o self-hosting para eliminar el round-trip a `fonts.gstatic.com`.
+- [ ] ⚪ **Imágenes sin pipeline `astro:assets`:** `avatar.png` / `og-image.png` van por `public/`
+  sin optimizar. Usar el componente `<Image>` de Astro para formatos modernos y tamaños responsivos.
+
+### Diseño
+- [ ] ⚪ **Modo oscuro (opcional):** coherente con el minimalismo si se mantiene monocromo
+  (invertir tokens). Evaluar costo/beneficio antes de añadir complejidad.
+- [ ] ⚪ **Favicon dependiente de fuente:** `favicon.svg` usa `<text>` con 'Sora', no garantizada
+  al renderizar el favicon. Convertir el monograma "SS" a paths vectoriales para consistencia.
 
 ---
 

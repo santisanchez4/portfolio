@@ -20,12 +20,22 @@ const projects = [
     icon: 'github',
     linkLabel: 'github.com/santisanchez4',
   },
+  {
+    title: 'CeliacMap',
+    url: 'https://github.com/santisanchez4',
+    status: 'Personal Project',
+    description:
+      'A resource map for the celiac community in Uruguay. Helps users find gluten-free friendly restaurants, pharmacies, and stores near them.',
+    tags: ['Astro', 'TypeScript', 'Maps', 'Uruguay'],
+    icon: 'github',
+    linkLabel: 'github.com/santisanchez4',
+  },
 ];
 ---
 
 <section id="projects" class="section">
   <div class="container">
-    <p class="section-label">Projects</p>
+    <h2 class="section-label">Projects</h2>
 
     <div class="projects-grid">
       {projects.map((project) => (
